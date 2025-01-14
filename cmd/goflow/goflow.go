@@ -41,7 +41,7 @@ var (
 	EnableKafka = flag.Bool("kafka", false, "Enable Kafka (NOT SUPPORTED IN THIS VERSION)")
 
 	EnableClickHouse = flag.Bool("ch", true, "Enable ClickHouse DB Integration")
-	
+
 	FixedLength = flag.Bool("proto.fixedlen", false, "Enable fixed length protobuf")
 	MetricsAddr = flag.String("metrics.addr", ":8080", "Metrics address")
 	MetricsPath = flag.String("metrics.path", "/metrics", "Metrics path")
@@ -114,7 +114,7 @@ func main() {
 	}
 
 	if *EnableClickHouse {
-		clickHouseState, err := transport.StartClickHouseConnection(log.StandardLogger())
+		clickHouseState, err := transport.StartClickHouseConnection(log.StandardLogger(), log.IsLevelEnabled(log.DebugLevel))
 		if err != nil {
 			log.Fatal(err)
 		}
